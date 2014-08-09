@@ -5,7 +5,6 @@ include_once('../module/class.db_functions.php');
 
 $db = new db_function();
 
-$roles = define_roles();
 
 //Check access to page
 $readperm = get_read_permission('country');
@@ -19,19 +18,19 @@ if (isset($_REQUEST['cid'])) {
 
 
 if ($cid == 0) {
-    //new language
+    //new country
     $country_id = 0;
     $countryname = '';
     $countryshort = '';
 } else {
-    //edit language
+    //edit country
     $country = $db -> get_all_country($cid);
     $country_id = $country['country_id'];
     $countryname = $country['country'];
     $countryshort = $country['country_short'];
 }
 
-//refresh user
+//refresh country
 
 
 

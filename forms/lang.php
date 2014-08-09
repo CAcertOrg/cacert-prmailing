@@ -5,7 +5,6 @@ include_once('../module/class.db_functions.php');
 
 $db = new db_function();
 
-$roles = define_roles();
 
 //Check access to page
 $readperm = get_read_permission('lang');
