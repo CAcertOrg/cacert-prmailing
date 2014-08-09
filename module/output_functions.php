@@ -275,5 +275,32 @@ function tablerow_viewlist_new(){
 }
 
 
+// language managemnt
+function tablerow_langlist_header(){
+    $tabstring = '<tr>' . "\n";
+    $tabstring .=   '<td class="DataTD">' . _('Language') . '</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">' . _('Language short') . '</td>' . "\n";
+    $tabstring .= '</tr>' . "\n";
+    return $tabstring;
+}
+
+
+function tablerow_langlist($lang){
+    $tabstring = '<tr>' . "\n";
+    $tabstring .=   '<td class="DataTD"><a href="../www/index.php?type=lang&lid='.$lang['language_id'].'">'.$lang['language'].'</a></td>' . "\n";
+    $tabstring .=   '<td class="DataTD">'.$lang['language_short'].'</td>' . "\n";
+    $tabstring .= '</tr>' . "\n";
+    return $tabstring;
+}
+
+
+function tablerow_langlist_new(){
+    $tabstring = '<tr>' . "\n";
+    $tabstring .=   '<td class="DataTD" colspan="2"><a href="../www/index.php?type=lang&lid=0">New entry</a></td>' . "\n";
+    $tabstring .= '</tr>' . "\n";
+    return $tabstring;
+}
+
+
 
 ?>

@@ -57,7 +57,7 @@ foohtmlnav1;
 			<li class="cat3"><a href="#"><span>$admin</span></a>
 			    <ul class="sub-menu">
 				<li><a href="index.php?type=userlist">$adminuser</a></li>
-				<li><a href="index.php?type=#">$adminlanguage</a></li>
+				<li><a href="index.php?type=langlist">$adminlanguage</a></li>
 				<li><a href="index.php?type=#">$admincountry</a></li>
 				<li><a href="index.php?type=#">$adminmedia</a></li>
 				<li><a href="index.php?type=viewlist">$adminview</a></li>

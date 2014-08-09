@@ -48,6 +48,12 @@ switch ($type) {
     case 'viewlist':
         ;$title = ' - ' . _('View List');
         break;
+    case 'lang':
+        ;$title = ' - ' . _('Language definition');
+        break;
+    case 'langlist':
+        ;$title = ' - ' . _('Language List');
+        break;
     default:
         $title = '';
 }
@@ -168,6 +174,32 @@ if ($type == 'view') {
     }
 }
 
+//language  management
+if ($type == 'langlist') {
+    include('../forms/langlist.php');
+}
+
+if ($type == 'lang') {
+    $continue=true;
+    if (isset( $_REQUEST['new']) || isset( $_REQUEST['edit'])) {
+        $read = 0;
+        $write = 0;
+        $lid = array_key_exists('lid',$_REQUEST) ? intval($_REQUEST['lid']) : '';
+        $lang = array_key_exists('lang',$_REQUEST) ? tidystring($_REQUEST['lang']) : '';
+        $langshort = array_key_exists('langshort',$_REQUEST) ? tidystring($_REQUEST['langshort']) : '';
+        if (isset( $_REQUEST['new'])){
+            $db -> insert_lang($lang, $langshort);
+        } else {
+            $db -> update_lang($lang, $langshort, $lid);
+        }
+
+        include('../forms/langlist.php');
+        $continue=false;
+    }
+    if ($continue==true) {
+        include('../forms/lang.php');
+    }
+}
 
 echo footerend();
 

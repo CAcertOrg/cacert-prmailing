@@ -234,5 +234,51 @@ class db_function{
     }
 
 
+
+
+
+    // language handling
+
+    public function get_all_lang($where = ''){
+        if ($where == '') {
+            $where = ' Where 1=1 ';
+        }else{
+            $where = ' Where language_id='.$where.' ';
+        }
+        $query = "select `language_id`, `language`, `language_short` from `language` " . $where . "ORDER BY `language`";
+        $res = $this -> db -> query($query);
+        if($where == ' Where 1=1 '){
+            return $res->fetchAll();
+        } else {
+            return $res->fetch();
+        }
+    }
+
+
+    public function insert_lang($lang, $langshort){
+        $query = "Insert into `language` (`language`, `language_short`)
+                VALUES ('$lang', '$langshort')";
+        $smt = $this -> db -> prepare($query);
+        $smt -> execute();
+        $nid = $this -> db -> lastInsertId();
+        //write log
+        write_log('admin', $nid, "added language '$lang'");
+
+    }
+
+
+    public function update_lang($lang, $langshort, $lid){
+
+        $query = "Update `language` Set `language` = '$lang',
+                `language_short` = '$langshort'
+                WHERE `language_id` = $lid";
+        $smt = $this -> db -> prepare($query);
+        $smt -> execute();
+        //write log
+        write_log('admin', $lid, "updated language '$lang'");
+    }
+
+
+
 }
 ?>
