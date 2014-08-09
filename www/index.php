@@ -59,7 +59,14 @@ switch ($type) {
         break;
     case 'countrylist':
         ;$title = ' - ' . _('Country List');
-        break;    default:
+        break;
+    case 'media':
+        ;$title = ' - ' . _('Media definition');
+        break;
+    case 'medialist':
+        ;$title = ' - ' . _('Media List');
+        break;
+    default:
         $title = '';
 }
 
@@ -231,6 +238,33 @@ if ($type == 'country') {
     }
     if ($continue==true) {
         include('../forms/country.php');
+    }
+}
+
+
+//media  management
+if ($type == 'medialist') {
+    include('../forms/medialist.php');
+}
+
+if ($type == 'media') {
+    $continue=true;
+    if (isset( $_REQUEST['new']) || isset( $_REQUEST['edit'])) {
+        $read = 0;
+        $write = 0;
+        $mid = array_key_exists('mid',$_REQUEST) ? intval($_REQUEST['mid']) : '';
+        $media = array_key_exists('media',$_REQUEST) ? tidystring($_REQUEST['media']) : '';
+        if (isset( $_REQUEST['new'])){
+            $db -> insert_media($media);
+        } else {
+            $db -> update_media($media, $mid);
+        }
+
+        include('../forms/medialist.php');
+        $continue=false;
+    }
+    if ($continue==true) {
+        include('../forms/media.php');
     }
 }
 

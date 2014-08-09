@@ -327,4 +327,29 @@ function tablerow_countrylist_new(){
     return $tabstring;
 }
 
+
+// media managemnt
+function tablerow_medialist_header(){
+    $tabstring = '<tr>' . "\n";
+    $tabstring .=   '<td class="DataTD">' . _('Media') . '</td>' . "\n";
+    $tabstring .= '</tr>' . "\n";
+    return $tabstring;
+}
+
+
+function tablerow_medialist($media){
+    $tabstring = '<tr>' . "\n";
+    $tabstring .=   '<td class="DataTD"><a href="../www/index.php?type=media&mid='.$media['media_id'].'">'.$media['media'].'</a></td>' . "\n";
+    $tabstring .= '</tr>' . "\n";
+    return $tabstring;
+}
+
+
+function tablerow_medialist_new(){
+    $tabstring = '<tr>' . "\n";
+    $tabstring .=   '<td class="DataTD" colspan="2"><a href="../www/index.php?type=media&mid=0">New entry</a></td>' . "\n";
+    $tabstring .= '</tr>' . "\n";
+    return $tabstring;
+}
+
 ?>

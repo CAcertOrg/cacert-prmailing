@@ -319,5 +319,46 @@ class db_function{
         write_log('admin', $cid, "updated country '$country'");
     }
 
+
+    // country handling
+
+    public function get_all_media($where = ''){
+        if ($where == '') {
+            $where = ' Where 1=1 ';
+        }else{
+            $where = ' Where media_id='.$where.' ';
+        }
+        $query = "select `media_id`, `media` from `media` " . $where . "ORDER BY `media`";
+        $res = $this -> db -> query($query);
+        if($where == ' Where 1=1 '){
+            return $res->fetchAll();
+        } else {
+            return $res->fetch();
+        }
+    }
+
+
+    public function insert_media($media){
+        $query = "Insert into `media` (`media`)
+                VALUES ('$media')";
+        $smt = $this -> db -> prepare($query);
+        $smt -> execute();
+        $nid = $this -> db -> lastInsertId();
+        //write log
+        write_log('admin', $nid, "added media '$media'");
+
+    }
+
+
+    public function update_media($media, $mid){
+
+        $query = "Update `media` Set `media` = '$media',
+                WHERE `media_id` = $mid";
+        $smt = $this -> db -> prepare($query);
+        $smt -> execute();
+        //write log
+        write_log('admin', $mid, "updated media '$media'");
+    }
+
 }
 ?>

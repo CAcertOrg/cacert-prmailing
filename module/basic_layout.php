@@ -59,7 +59,7 @@ foohtmlnav1;
 				<li><a href="index.php?type=userlist">$adminuser</a></li>
 				<li><a href="index.php?type=langlist">$adminlanguage</a></li>
 				<li><a href="index.php?type=countrylist">$admincountry</a></li>
-				<li><a href="index.php?type=#">$adminmedia</a></li>
+				<li><a href="index.php?type=medialist">$adminmedia</a></li>
 				<li><a href="index.php?type=viewlist">$adminview</a></li>
 			    </ul>
 			</li>
