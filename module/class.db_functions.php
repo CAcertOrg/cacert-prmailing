@@ -278,7 +278,46 @@ class db_function{
         write_log('admin', $lid, "updated language '$lang'");
     }
 
+    // country handling
 
+    public function get_all_country($where = ''){
+        if ($where == '') {
+            $where = ' Where 1=1 ';
+        }else{
+            $where = ' Where country_id='.$where.' ';
+        }
+        $query = "select `country_id`, `country`, `country_short` from `country` " . $where . "ORDER BY `country`";
+        $res = $this -> db -> query($query);
+        if($where == ' Where 1=1 '){
+            return $res->fetchAll();
+        } else {
+            return $res->fetch();
+        }
+    }
+
+
+    public function insert_country($country, $countryshort){
+        $query = "Insert into `country` (`country`, `country_short`)
+                VALUES ('$country', '$countryshort')";
+        $smt = $this -> db -> prepare($query);
+        $smt -> execute();
+        $nid = $this -> db -> lastInsertId();
+        //write log
+        write_log('admin', $nid, "added country '$country'");
+
+    }
+
+
+    public function update_country($country, $countryshort, $cid){
+
+        $query = "Update `country` Set `country` = '$country',
+                `country_short` = '$countryshort'
+                WHERE `country_id` = $cid";
+        $smt = $this -> db -> prepare($query);
+        $smt -> execute();
+        //write log
+        write_log('admin', $cid, "updated country '$country'");
+    }
 
 }
 ?>

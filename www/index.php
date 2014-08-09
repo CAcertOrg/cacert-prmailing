@@ -54,7 +54,12 @@ switch ($type) {
     case 'langlist':
         ;$title = ' - ' . _('Language List');
         break;
-    default:
+    case 'country':
+        ;$title = ' - ' . _('Country definition');
+        break;
+    case 'countrylist':
+        ;$title = ' - ' . _('Country List');
+        break;    default:
         $title = '';
 }
 
@@ -198,6 +203,34 @@ if ($type == 'lang') {
     }
     if ($continue==true) {
         include('../forms/lang.php');
+    }
+}
+
+
+//country  management
+if ($type == 'countrylist') {
+    include('../forms/countrylist.php');
+}
+
+if ($type == 'country') {
+    $continue=true;
+    if (isset( $_REQUEST['new']) || isset( $_REQUEST['edit'])) {
+        $read = 0;
+        $write = 0;
+        $cid = array_key_exists('cid',$_REQUEST) ? intval($_REQUEST['cid']) : '';
+        $country = array_key_exists('country',$_REQUEST) ? tidystring($_REQUEST['country']) : '';
+        $countryshort = array_key_exists('countryshort',$_REQUEST) ? tidystring($_REQUEST['countryshort']) : '';
+        if (isset( $_REQUEST['new'])){
+            $db -> insert_country($country, $countryshort);
+        } else {
+            $db -> update_country($country, $countryshort, $cid);
+        }
+
+        include('../forms/countrylist.php');
+        $continue=false;
+    }
+    if ($continue==true) {
+        include('../forms/country.php');
     }
 }
 

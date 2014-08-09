@@ -301,6 +301,30 @@ function tablerow_langlist_new(){
     return $tabstring;
 }
 
+// language managemnt
+function tablerow_countrylist_header(){
+    $tabstring = '<tr>' . "\n";
+    $tabstring .=   '<td class="DataTD">' . _('Country') . '</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">' . _('Country short') . '</td>' . "\n";
+    $tabstring .= '</tr>' . "\n";
+    return $tabstring;
+}
 
+
+function tablerow_countrylist($country){
+    $tabstring = '<tr>' . "\n";
+    $tabstring .=   '<td class="DataTD"><a href="../www/index.php?type=country&cid='.$country['country_id'].'">'.$country['country'].'</a></td>' . "\n";
+    $tabstring .=   '<td class="DataTD">'.$country['country_short'].'</td>' . "\n";
+    $tabstring .= '</tr>' . "\n";
+    return $tabstring;
+}
+
+
+function tablerow_countrylist_new(){
+    $tabstring = '<tr>' . "\n";
+    $tabstring .=   '<td class="DataTD" colspan="2"><a href="../www/index.php?type=country&cid=0">New entry</a></td>' . "\n";
+    $tabstring .= '</tr>' . "\n";
+    return $tabstring;
+}
 
 ?>
