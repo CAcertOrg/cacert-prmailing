@@ -320,7 +320,7 @@ class db_function{
     }
 
 
-    // country handling
+    // media handling
 
     public function get_all_media($where = ''){
         if ($where == '') {
@@ -358,6 +358,59 @@ class db_function{
         $smt -> execute();
         //write log
         write_log('admin', $mid, "updated media '$media'");
+    }
+
+
+    // contatct handling
+
+    public function get_all_contact($where = ''){
+        if ($where == '') {
+            $where = '';
+        }else{
+            $where =  $where;
+        }
+        $query = "SELECT `c`.`contact_id`, `c`.`contactinfo`, `c`.`contactname`, `c`.`email`, `c`.`country_id` as `countryid`, `c`.`language_id` as `languageid`, `c`.`media_id` as `mediaid`, `c`.`comment`, `c`.`active`, `ct`.`country`, `m`.`media`, `l`.`language`
+                    FROM `contact` as `c`, `country` as `ct`, `media` as `m`, `language` as `l`
+                    WHERE `c`.`country_id` = `ct`.`country_id` AND `c`.`language_id` = `l`.`language_id` AND `c`.`media_id` = `m`.`media_id` $where
+                    ORDER BY `c`.`contactname`";
+
+        $res = $this -> db -> query($query);
+//        if($where == ' Where 1=1 '){
+            return $res->fetchAll();
+//        } else {
+//            return $res->fetch();
+//        }
+    }
+
+
+    public function insert_contact($contactinfo, $contactname, $email, $country_id, $language_id, $media_id, $comment, $active){
+        $query = "Insert into `contact` (`contactinfo`, `contactname`, `email`, `country_id`, `language_id`, `media_id`, `comment`, `active`)
+                VALUES ('$contactinfo', '$contactname', '$email', $country_id, $language_id, $media_id, '$comment', $active)";
+        $smt = $this -> db -> prepare($query);
+        $smt -> execute();
+        $nid = $this -> db -> lastInsertId();
+        //write log
+        write_log('admin', $nid, "added contact '$contactname'");
+    }
+
+
+    public function update_contact($contactinfo, $contactname, $email, $country_id, $language_id, $media_id, $comment, $active, $cid){
+
+        $query = "Update `contact` Set `contactinfo` = '$contactinfo',
+                    `contactinfo` = '$contactinfo',
+                    `contactname` = '$contactname',
+                    `email` = '$email',
+                    `country_id` = '$country_id',
+                    `language_id` = '$language_id',
+                    `media_id` = '$media_id',
+                    `comment` = '$comment',
+                    `active` = '$active'
+                WHERE `contact_id` = $cid";
+
+        $smt = $this -> db -> prepare($query);
+        $smt -> execute();
+        //write log
+        write_log('admin', $cid, "updated contact '$contactname'");
     }
 
 }

@@ -352,4 +352,41 @@ function tablerow_medialist_new(){
     return $tabstring;
 }
 
+// contact managemnt
+function tablerow_contactlist_header(){
+    $tabstring = '<tr>' . "\n";
+    $tabstring .=   '<td class="DataTD">' . _('Contact info') . '</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">' . _('Contact name') . '</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">' . _('Email') . '</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">' . _('Country') . '</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">' . _('Language') . '</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">' . _('Media') . '</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">' . _('Comment') . '</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">' . _('Active') . '</td>' . "\n";
+    $tabstring .= '</tr>' . "\n";
+    return $tabstring;
+}
+
+
+function tablerow_contactlist($contact){
+    $tabstring = '<tr>' . "\n";
+    $tabstring .=   '<td class="DataTD"><a href="../www/index.php?type=contact&cid='.$contact['contact_id'].'">'.$contact['contactinfo'].'</a></td>' . "\n";
+    $tabstring .=   '<td class="DataTD">'.$contact['contactname'].'</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">'.$contact['email'].'</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">'.$contact['country'].'</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">'.$contact['language'].'</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">'.$contact['media'].'</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">'.$contact['comment'].'</td>' . "\n";
+    $tabstring .=   '<td class="DataTD">'.$contact['active'].'</td>' . "\n";
+    $tabstring .= '</tr>' . "\n";
+    return $tabstring;
+}
+
+function tablerow_contactlist_new(){
+    $tabstring = '<tr>' . "\n";
+    $tabstring .=   '<td class="DataTD" colspan="8"><a href="../www/index.php?type=contact&cid=0">New entry</a></td>' . "\n";
+    $tabstring .= '</tr>' . "\n";
+    return $tabstring;
+}
+
 ?>

@@ -120,4 +120,14 @@ function write_log($file, $id, $content){
     fwrite($f, $output);
     fclose($f);
 }
+
+function checkEmailAdress($email)
+{
+    $s = '/^[A-Z0-9._-]+@[A-Z0-9][A-Z0-9.-]{0,61}[A-Z0-9]\.[A-Z.]{2,6}$/i';
+    if (preg_match($s, $email)){
+         return true;
+    }
+    return FALSE;
+}
+
 ?>

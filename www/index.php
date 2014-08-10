@@ -267,6 +267,48 @@ if ($type == 'media') {
         include('../forms/media.php');
     }
 }
+//contact  management
+if ($type == 'contactlist') {
+    include('../forms/contactlist.php');
+}
+
+if ($type == 'contact') {
+    $continue=true;
+    if (isset( $_REQUEST['new']) || isset( $_REQUEST['edit'])) {
+        $read = 0;
+        $write = 0;
+        $cid = array_key_exists('cid',$_REQUEST) ? intval($_REQUEST['cid']) : '';
+        $contactinfo = array_key_exists('contactinfo',$_REQUEST) ? tidystring($_REQUEST['contactinfo']) : '';
+        $contactname = array_key_exists('contactname',$_REQUEST) ? tidystring($_REQUEST['contactname']) : '';
+        $email = array_key_exists('email',$_REQUEST) ? tidystring($_REQUEST['email']) : '';
+        $country_id = array_key_exists('country_id',$_REQUEST) ? intval($_REQUEST['country_id']) : 0;
+        $language_id = array_key_exists('language_id',$_REQUEST) ? intval($_REQUEST['language_id']) : 0;
+        $media_id = array_key_exists('media_id',$_REQUEST) ? intval($_REQUEST['media_id']) : 0;
+        $comment = array_key_exists('comment',$_REQUEST) ? tidystring($_REQUEST['comment']) : '';
+        $activetest = array_key_exists('active',$_REQUEST) ? tidystring($_REQUEST['active']) : '';
+        if ($activetest == 'on') {
+            $active = 1;
+        } else {
+            $active = 0;
+        }
+        if (checkEmailAdress($email) && !$contactinfo){
+            if (isset( $_REQUEST['new'])){
+                $db -> insert_contact($contactinfo, $contactname, $email, $country_id, $language_id, $media_id, $comment, $active);
+            } else {
+                $db -> update_contact($contactinfo, $contactname, $email, $country_id, $language_id, $media_id, $comment, $active, $cid);
+            }
+
+            include('../forms/contactlist.php');
+            $continue=false;
+        } else {
+            echo '<div class="error">' . _('The data is not valid.') . '</div>';
+        }
+
+    }
+    if ($continue==true) {
+        include('../forms/contact.php');
+    }
+}
 
 echo footerend();
 

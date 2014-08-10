@@ -46,7 +46,7 @@ function menu(){
 			<li class="cat1">
 				<a href="#">$mailing</a>
 			    <ul>
-				<li><a href="index.php?type=#">$mailingadress</a></li>
+				<li><a href="index.php?type=contactlist">$mailingadress</a></li>
 				<li><a href="index.php?type=#">$mailingtopic</a></li>
 			    </ul>
 			</li>
